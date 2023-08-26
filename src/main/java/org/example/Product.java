@@ -5,7 +5,7 @@ public class Product {
     private double price;
     private int rating;
 
-    public Product(String name, double price, int rating){
+    public Product(String name, double price, int rating) {
         this.name = name;
         this.price = price;
         this.rating = rating;
@@ -21,5 +21,9 @@ public class Product {
 
     public int getRating() {
         return rating;
+    }
+
+    public void add(int rating) {
+
     }
 }
