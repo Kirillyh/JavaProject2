@@ -1,19 +1,43 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.ArrayList;
+
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args){
+        Shop shop = new Shop();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Category category1 = new Category("Электроника");
+        category1.addProduct(new Product("Телевизор", 500.0, 4));
+        category1.addProduct(new Product("Смартфон", 1000.0, 5));
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        Category category2 = new Category("Одежда");
+        category2.addProduct(new Product("Футболка", 20.0, 3));
+        category2.addProduct(new Product("Джинсы", 50.0, 4));
+
+        shop.addCategory(category1);
+        shop.addCategory(category2);
+
+        shop.printCatalog();
+
+        User user1 = new User("user1","password1");
+        User user2 = new User("user2","password2");
+
+        user1.getBasket().addProduct(category1.getProducts().get(0));
+        user2.getBasket().addProduct(category2.getProducts().get(1));
+
+        category1.getProducts().remove(0);
+        category2.getProducts().remove(1);
+
+        System.out.println(user1.getLogin()+" - Покупки");
+        ArrayList<Product> user1Products = user1.getBasket().getProducts();
+        for (Product product : user1Products){
+            System.out.println("-" + product.getName() + "-" + product.getPrice() + "-" + product.getRating());
+
+        }
+        System.out.println(user2.getLogin() + "- Покупки");
+        ArrayList<Product> user2Products = user2.getBasket().getProducts();
+        for (Product product : user2Products)  {
+            System.out.println("-" + product.getName() + "-" + product.getPrice() + "-" + product.getRating());
         }
     }
 }
