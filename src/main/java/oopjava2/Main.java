@@ -1,114 +1,161 @@
 package oopjava2;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+
+import oopjava2.Megicains.Monk;
+import oopjava2.Megicains.Wizard;
+import oopjava2.Shooters.Crossbowman;
+import oopjava2.Shooters.Sniper;
+import oopjava2.Warriors.Peasant;
+import oopjava2.Warriors.Raider;
+import oopjava2.Warriors.Spearman;
+
 /*
 Проанализировать персонажей "Крестьянин, Разбойник, Снайпер, Колдун, Копейщик, Арбалетчик, Монах".
 Для каждого определит 8 полей данных(здоровье, сила итд) 3-4 поля поведения(методов атаковать, вылечить итд).
 Создать абстрактный класс и иерархию наследников.
  */
 
- /*Крестьянин:
-  - Здоровье
-  - Сила
-  - Ловкость
-  - Выносливость
-  - Вид оружия
-  - Уровень
-  - ID
-  - Имя
+/*Крестьянин:      Разбойник:              Копейщик:
+ - Здоровье        - ID                    - ID
+ - Сила            - Имя                   - Имя
+ - Ловкость        - Здоровье              - Здоровье
+ - Выносливость    - Сила                  - Сила
+ - Вид оружия      - Ловкость              - Выносливость
+ - Уровень         - Выносливость          - Вид оружия
+ - ID              - Вид оружиня           - Защита
+ - Имя
 
-  Разбойник:
-  - ID
-  - Имя
-  - Здоровье
-  - Сила
-  - Ловкость
-  - Выносливость
-  - Вид оружиня
+ Снайпер           Арбалетчик:             Колдун:             Монах:
+ - ID              - ID                    - ID                - ID
+ - Имя             - Имя                   - Имя               - Имя
+ - Здоровье        - Здоровье              - Здоровье          - Здоровье
+ - Сила            - Выносливость          - Интеллект         - Выносливость
+ - Ловкость        - Вид оружия            - Выносливость      - Вид оружия
+ - Выносливость    - Меткость              - Вид оружия        - Интеллект
+ - Вид оружия      - Количество стрел      - Мана              - Вера
+ - Меткость        - Скорость стрельбы                         - Чакра
+ - Маскировка
 
-  Снайпер
-  - ID
-  - Имя
-  - Здоровье
-  - Сила
-  - Ловкость
-  - Выносливость
-  - Вид оружия
-  - Меткость
-  - Маскировка
-
-  Колдун:
-  - ID
-  - Имя
-  - Здоровье
-  - Интеллект
-  - Выносливость
-  - Вид оружия
-  - Мана
-
-  Копейщик:
-  - ID
-  - Имя
-  - Здоровье
-  - Сила
-  - Выносливость
-  - Вид оружия
-  - Защита
-
-  Арбалетчик:
-  - ID
-  - Имя
-  - Здоровье
-  - Выносливость
-  - Вид оружия
-  - Меткость
-  - Количество стрел
-  - Скорость стрельбы
-
-  Монах:
-  - ID
-  - Имя
-  - Здоровье
-  -Выносливость
-  - Вид оружия
-  - Интеллект
-  - Вера
-  - Чакра
 
 */
-/*Крестьянин
-Разбойник
-Снайпер
-Колдун
-Копейщик
-Арбалетчик
-Монах 
-
-Для каждого определит 8 полей данных(здоровье, сила итд) 3-4 поля поведения(методов атаковать, вылечить итд)
-
-*/
-/**
- * Main
- */
 public class Main {
     public static void main(String[] args) {
-        Sniper sniper = new Sniper(0, "Sniper", 0, 0, null, 0, 0);
-        Crossbowman crossbowman = new Crossbowman(0, "Crossbowman", 0, 0, null, 0, 0);
-        Sorcerer magic = new Sorcerer(0, "Paul", 0, 0, null, 0, 0);
-        Peasant peasant = new Peasant(0, "Shon", 0, 0, null, 0, 0);
-        Spearman spearman = new Spearman(0, "Denis", 0, 0, null, 0, 0);
-        Monk Monk = new Monk(0, "Kirill", 0, 0, null, 0, 0);
-        Robber Robber = new Robber(0, "Viktor", 0, 0, null, 0, 0);
 
-        System.out.println(sniper.getInfo());
-        System.out.println(crossbowman.getInfo());
-        System.out.println(magic.getInfo());
-        System.out.println(peasant.getInfo());
-        System.out.println(spearman.getInfo());
-        System.out.println(Robber.getInfo());
-        System.out.println(Monk.getInfo());
-        // В данном коде создаются экземпляры различных классов (Sniper, Crossbowman, Magic, Peasant, Spearman) с определенными параметрами (id, name, hp, damage, target, posX, posY).
-// Затем вызывается метод getInfo() для каждого созданного экземпляра, чтобы вывести информацию о каждом персонаже.
-// Каждый персонаж представлен в отдельной строке с помощью метода println.
-// Данный код позволяет создавать и отображать информацию о различных персонажах в игре.
+        Sniper sniper = new Sniper(fillName(), 0, 0);
+        Crossbowman crossbowman = new Crossbowman(fillName(), 0, 0);
+        Wizard magic = new Wizard(fillName(), 0, 0);
+        Peasant peasant = new Peasant(fillName(), 0, 0);
+        Spearman spearman = new Spearman(fillName(), 0, 0);
+        Monk monk = new Monk(fillName(), 0, 0);
+        Raider raider = new Raider(fillName(), 0, 0);
+
+        // System.out.printf("Name: %s %s\n",sniper.name, sniper.toString());
+        // System.out.printf("Name: %s %s\n",crossbowman.name, crossbowman.toString());
+        // System.out.printf("Name: %s %s\n",magic.name, magic.toString());
+        // System.out.printf("Name: %s %s\n",monk.name, monk.toString());
+        // System.out.printf("Name: %s %s\n",spearman.name, spearman.toString());
+        // System.out.printf("Name: %s %s\n",raider.name, raider.toString());
+        // System.out.printf("Name: %s %s\n",peasant.name, peasant.toString());
+
+        int teamCount = 10;
+        List<BaseCharacter> team1 = new ArrayList<>();
+        List<BaseCharacter> team2 = new ArrayList<>();
+
+        for (int i = 0; i < teamCount; i++) {
+            switch (new Random().nextInt(1, 8)) {
+                case 1:
+                    team1.add(new Monk(fillName(), i, 0));
+                    break;
+                case 2:
+                    team1.add(new Wizard(fillName(), i, 0));
+                    break;
+                case 3:
+                    team1.add(new Crossbowman(fillName(), i, 0));
+                    break;
+                case 4:
+                    team1.add(new Sniper(fillName(), i, 0));
+                    break;
+                case 5:
+                    team1.add(new Peasant(fillName(), i, 0));
+                    break;
+                case 6:
+                    team1.add(new Raider(fillName(), i, 0));
+                    break;
+                case 7:
+                    team1.add(new Spearman(fillName(), i, 0));
+                    break;
+            }
+        }
+
+        for (int i = 0; i < teamCount; i++) {
+            switch (new Random().nextInt(1, 8)) {
+                case 1:
+                    team2.add(new Monk(fillName(), i, 9));
+                    break;
+                case 2:
+                    team2.add(new Wizard(fillName(), i, 9));
+                    break;
+                case 3:
+                    team2.add(new Crossbowman(fillName(), i, 9));
+                    break;
+                case 4:
+                    team2.add(new Sniper(fillName(), i, 9));
+                    break;
+                case 5:
+                    team2.add(new Peasant(fillName(), i, 5));
+                    break;
+                case 6:
+                    team2.add(new Raider(fillName(), i, 9));
+                    break;
+                case 7:
+                    team2.add(new Spearman(fillName(), i, 9));
+                    break;
+            }
+        }
+        /*
+         * #Сделал еще один вариант алгоритма распределения по командам
+         */
+        // for (int i = 0; i < teamCount; i++) {
+
+        //     switch (new Random().nextInt(4)) {
+        //         case 0:
+        //             team1.add(new Monk(fillName(), i, 0));
+        //             team2.add(new Wizard(fillName(), i, 9));
+        //             break;
+        //         case 1:
+        //             team1.add(new Crossbowman(fillName(), i, 0));
+        //             team2.add(new Sniper(fillName(), i, 9));
+        //             break;
+        //         case 2:
+        //             team1.add(new Raider(fillName(), i, 0));
+        //             team2.add(new Spearman(fillName(), i, 9));
+        //             break;
+        //         case 3:
+        //             team1.add(new Peasant(fillName(), i, 0));
+        //             team2.add(new Peasant(fillName(), i, 9));
+        //             break;
+        //     }
+        // }
+        for (BaseCharacter unit : team1) {
+            System.out.printf("Имя: %s, Класс: %s, Координаты: %d,%d\n", unit.getName(), unit.getClass().getSimpleName(), unit.position.getX(), unit.position.getY());
+        }
+        System.out.println();
+        for (BaseCharacter unit : team2) {
+            System.out.printf("Имя: %s, Класс: %s, Координаты: %d,%d\n", unit.getName(), unit.getClass().getSimpleName(), unit.position.getX(), unit.position.getY());
+        }
+        // Проба метода getInfo
+        System.out.println(team1.get(0).getInfo());
+        System.out.println("------------------");
+
+        // визуально видно, что персонаж из второй команды, который стоит не на 9 клетке а на 5, определяется как цель
+        System.out.println(team1.get(2).nearestEnemy(team2));
     }
 
+    private static String fillName(){
+        return String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
+    }
 }
